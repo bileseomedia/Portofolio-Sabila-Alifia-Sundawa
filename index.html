@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sabila Alifia Sundawa — Personal Portfolio</title>
+
+  <!-- Google Fonts: Fraunces (Playful Serif), DM Sans (Friendly Sans), Caveat (Handwriting) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            canvas: '#FDFBFF',
+            surface: '#F5F0FF',
+            'lavender-soft': '#F0EAFB',
+            'peach-soft': '#FFF4EF',
+            ink: '#4A4458',
+            'ink-soft': '#7A738C',
+            'ink-muted': '#A89FB8',
+            cobalt: '#A8B5F0',
+            'cobalt-hover': '#8E9EE8',
+            'cobalt-tint': '#EEF1FC',
+            violet: '#C8B6E8',
+            'violet-tint': '#F5EFFB',
+            terracotta: '#F5B7A8',
+            'terracotta-tint': '#FFF1EC',
+            teal: '#A8D8D0',
+            'teal-tint': '#EAF8F5',
+            blush: '#FFD6E0',
+            'blush-tint': '#FFF0F4',
+            hairline: '#EDE7F5',
+          },
+          fontFamily: {
+            sans: ['"DM Sans"', 'sans-serif'],
+            serif: ['"Fraunces"', 'serif'],
+            hand: ['"Caveat"', 'cursive'],
+          },
+          boxShadow: {
+            'soft': '0 16px 40px -12px rgba(74, 68, 88, 0.08)',
+            'card-hover': '0 22px 44px -12px rgba(168, 181, 240, 0.25)',
+            'cobalt': '0 12px 28px -6px rgba(168, 181, 240, 0.45)',
+            'coral': '0 12px 28px -6px rgba(245, 183, 168, 0.45)',
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body class="antialiased selection:bg-cobalt selection:text-white">
+
+  <!-- Minimal Custom Cursor Ring -->
+  <div id="customCursor" class="custom-cursor-dot opacity-0"></div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="fixed top-20 right-4 sm:right-6 z-[110] flex flex-col gap-2.5 max-w-sm w-full pointer-events-none"></div>
+
+  <!-- ==================== NAVIGATION BAR ==================== -->
+  <header id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-300 py-4 px-4 sm:px-8">
+    <div class="max-w-6xl mx-auto">
+      <nav class="flex items-center justify-between rounded-2xl px-4 sm:px-6 py-3 bg-white/90 backdrop-blur-xl border border-white/60 shadow-soft">
+        <!-- Brand Identity -->
+        <a href="#hero" class="flex items-center gap-3 group interactive-target" aria-label="Beranda Sabila Alifia Sundawa">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-violet via-cobalt to-terracotta text-white flex items-center justify-center font-serif font-bold text-sm tracking-tight transition-transform duration-300 group-hover:scale-105 shadow-sm">
+            Sa
+          </div>
+          <div class="flex flex-col">
+            <span class="font-serif font-semibold text-sm text-ink leading-none">Sabila Alifia</span>
+            <span class="text-[11px] text-ink-muted mt-1 font-sans">S1 Manajemen</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <div class="hidden lg:flex items-center gap-1">
+          <a href="#about" class="px-3.5 py-2 rounded-xl text-xs font-medium text-ink-soft hover:text-ink hover:bg-surface transition-colors interactive-target">Tentang Saya</a>
+          <a href="#experience" class="px-3.5 py-2 rounded-xl text-xs font-medium text-ink-soft hover:text-ink hover:bg-surface transition-colors interactive-target">Pengalaman</a>
+          <a href="#leadership" class="px-3.5 py-2 rounded-xl text-xs font-medium text-ink-soft hover:text-ink hover:bg-surface transition-colors interactive-target">Organisasi</a>
+          <a href="#projects" class="px-3.5 py-2 rounded-xl text-xs font-medium text-ink-soft hover:text-ink hover:bg-surface transition-colors interactive-target">Project</a>
+          <a href="#skills" class="px-3.5 py-2 rounded-xl text-xs font-medium text-ink-soft hover:text-ink hover:bg-surface transition-colors interactive-target">Kemampuan</a>
+          <a href="#gallery" class="px-3.5 py-2 rounded-xl text-xs font-medium text-ink-soft hover:text-ink hover:bg-surface transition-colors interactive-target">Galeri</a>
+        </div>
+
+        <!-- Right Action Controls -->
+        <div class="flex items-center gap-2">
+          <button onclick="openStudioModal('profile')" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-surface hover:bg-cobalt-tint text-ink hover:text-cobalt text-xs font-semibold border border-hairline transition-all interactive-target" title="Kelola Foto, Project & Konten">
+            <svg class="w-3.5 h-3.5 text-cobalt" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            </svg>
+            <span>Kelola Konten</span>
+          </button>
+
+          <a href="#contact" class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-ink hover:bg-cobalt text-white text-xs font-semibold transition-all interactive-target">
+            <span>Kontak</span>
+          </a>
+
+          <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-xl bg-surface text-ink hover:bg-hairline transition-colors interactive-target" aria-label="Menu Navigasi">
+            <svg id="menuIconOpen" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h10" />
+            </svg>
+            <svg id="menuIconClose" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </nav>
+
+      <!-- Mobile Navigation Drawer -->
+      <div id="mobileMenu" class="lg:hidden hidden mt-2 rounded-2xl bg-white/95 backdrop-blur-xl border border-hairline p-4 shadow-xl">
+        <div class="grid grid-cols-2 gap-2">
+          <a href="#about" onclick="closeMobileMenu()" class="px-4 py-3 rounded-xl bg-surface text-xs font-semibold text-ink hover:bg-cobalt-tint transition-colors">Tentang Saya</a>
+          <a href="#experience" onclick="closeMobileMenu()" class="px-4 py-3 rounded-xl bg-surface text-xs font-semibold text-ink hover:bg-cobalt-tint transition-colors">Pengalaman</a>
+          <a href="#leadership" onclick="closeMobileMenu()" class="px-4 py-3 rounded-xl bg-surface text-xs font-semibold text-ink hover:bg-cobalt-tint transition-colors">Organisasi</a>
+          <a href="#projects" onclick="closeMobileMenu()" class="px-4 py-3 rounded-xl bg-surface text-xs font-semibold text-ink hover:bg-cobalt-tint transition-colors">Project</a>
+          <a href="#skills" onclick="closeMobileMenu()" class="px-4 py-3 rounded-xl bg-surface text-xs font-semibold text-ink hover:bg-cobalt-tint transition-colors">Kemampuan</a>
+          <a href="#gallery" onclick="closeMobileMenu()" class="px-4 py-3 rounded-xl bg-surface text-xs font-semibold text-ink hover:bg-cobalt-tint transition-colors">Galeri</a>
+        </div>
+        <a href="#contact" onclick="closeMobileMenu()" class="mt-3 w-full flex items-center justify-center py-3 rounded-xl bg-ink text-white text-xs font-semibold">
+          Hubungi Saya
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <div id="heroScrollTrack" class="relative min-h-[132vh] sm:min-h-[140vh]">
+    <section id="hero" class="sticky top-0 h-screen w-full overflow-hidden flex items-center pt-20 pb-14 px-4 sm:px-8">
+      <div id="heroBgLayer" class="absolute inset-0 w-full h-full will-change-transform">
+        <div id="heroDefaultArtBg" class="hero-gradient-backdrop w-full h-full"></div>
+        <img id="heroBgImg" src="" alt="Latar Belakang Sabila Alifia Sundawa" class="hidden w-full h-full object-cover select-none" />
+        <div class="absolute inset-0 bg-gradient-to-r from-[#3A3355]/70 via-[#5A5080]/40 to-[#C8B6E8]/20"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#3A3355]/60 via-transparent to-transparent"></div>
+        <div class="pointer-events-none absolute -top-20 right-[8%] w-80 sm:w-[28rem] h-80 sm:h-[28rem] rounded-full bg-blush/40 blur-[120px] animate-float-gentle"></div>
+        <div class="pointer-events-none absolute bottom-10 left-[12%] w-72 sm:w-[24rem] h-72 sm:h-[24rem] rounded-full bg-cobalt/40 blur-[120px] animate-float-gentle-rev"></div>
+      </div>
+
+      <div id="heroScrollVeil" class="pointer-events-none absolute inset-0 bg-[#3A3355] opacity-0"></div>
+
+      <div id="heroContentLayer" class="max-w-6xl mx-auto w-full relative z-10 will-change-transform">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+          <div class="lg:col-span-8 space-y-6">
+            <div class="inline-flex flex-wrap items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white shadow-sm">
+              <span class="w-2 h-2 rounded-full bg-blush animate-pulse"></span>
+              <span class="text-xs font-semibold tracking-wide">S1 Manajemen • Pradita University</span>
+              <span id="storageStatusBadge" class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-cobalt/80 text-white">Tersimpan</span>
+            </div>
+
+            <div class="space-y-3">
+              <p class="reveal-mask">
+                <span class="reveal-line text-base sm:text-lg font-hand font-bold tracking-wide text-blush" style="transition-delay: 80ms;">
+                  Halo, saya Sabila Alifia Sundawa
+                </span>
+              </p>
+              <h1 class="font-serif font-bold text-4xl sm:text-5xl md:text-[3.6rem] leading-[1.08] tracking-tight text-white">
+                <span class="reveal-mask">
+                  <span class="reveal-line" style="transition-delay: 180ms;">Exploring Business,</span>
+                </span>
+                <span class="reveal-mask">
+                  <span class="reveal-line" style="transition-delay: 300ms;">
+                    <span class="font-serif italic font-normal text-[1.14em] text-blush">Digital Creativity</span> &amp; Beyond<span class="text-blush">.</span>
+                  </span>
+                </span>
+              </h1>
+            </div>
+
+            <div class="reveal-mask">
+              <p id="heroBioText" class="reveal-line text-sm sm:text-base md:text-[1.06rem] text-white/90 leading-relaxed max-w-2xl" style="transition-delay: 420ms;">
+                Mahasiswa Manajemen yang memiliki ketertarikan pada bidang bisnis, e-commerce, digital marketing, komunikasi, dan pengelolaan media sosial.
+              </p>
+            </div>
+
+            <div class="reveal-mask pt-1">
+              <div class="reveal-line flex flex-wrap items-center gap-3.5" style="transition-delay: 520ms;">
+                <a href="#projects" class="magnetic-btn group inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-violet to-cobalt hover:from-terracotta hover:to-violet text-white font-semibold text-sm shadow-cobalt interactive-target">
+                  <span>Explore My Work</span>
+                  <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+                <a href="#contact" class="magnetic-btn inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-white/20 hover:bg-white text-white hover:text-ink backdrop-blur-md font-semibold text-sm border border-white/30 transition-all interactive-target">
+                  <span>Contact Me</span>
+                </a>
+                <button onclick="openStudioModal('profile')" class="inline-flex items-center gap-2 px-4 py-3.5 rounded-2xl bg-white/15 hover:bg-terracotta text-white/90 hover:text-white backdrop-blur-md text-xs font-semibold border border-white/25 transition-all interactive-target">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  <span id="heroPhotoActionLabel">Pasang Foto Latar</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="pt-2 flex flex-wrap items-center gap-2">
+              <span class="px-3 py-1 rounded-xl bg-white/15 backdrop-blur-md border border-white/25 text-xs font-medium text-white/95">E-Commerce</span>
+              <span class="px-3 py-1 rounded-xl bg-white/15 backdrop-blur-md border border-white/25 text-xs font-medium text-white/95">Live Commerce</span>
+              <span class="px-3 py-1 rounded-xl bg-white/15 backdrop-blur-md border border-white/25 text-xs font-medium text-white/95">Digital Marketing</span>
+              <span class="px-3 py-1 rounded-xl bg-white/15 backdrop-blur-md border border-white/25 text-xs font-medium text-white/95">Social Media</span>
+              <span class="px-3 py-1 rounded-xl bg-white/15 backdrop-blur-md border border-white/25 text-xs font-medium text-white/95">Content Creation</span>
+            </div>
+          </div>
+
+          <div class="lg:col-span-4 flex flex-col items-start lg:items-end justify-end gap-4">
+            <div id="heroUploadHintCard" onclick="openStudioModal('profile')" class="cursor-pointer group max-w-xs rounded-2xl bg-white/20 hover:bg-white/30 backdrop-blur-xl border border-white/30 p-4 text-white transition-all interactive-target">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blush to-violet flex items-center justify-center shrink-0 shadow-sm group-hover:scale-105 transition-transform">
+                  <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-xs font-bold text-white">Gunakan Foto Kamu di Sini</p>
+                  <p class="text-[11px] text-white/85 mt-0.5 leading-snug">Klik untuk mengunggah foto profil sebagai latar pembuka penuh.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="heroScrollCue" class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-white/80 pointer-events-none">
+        <span class="text-[11px] font-semibold tracking-widest uppercase">Scroll ke Bawah</span>
+        <div class="w-[2px] h-8 bg-white/25 rounded-full overflow-hidden">
+          <div class="w-full h-full bg-gradient-to-b from-blush to-white animate-scroll-line"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==================== ABOUT SECTION ==================== -->
+  <section id="about" class="relative z-20 -mt-[16vh] sm:-mt-[20vh] rounded-t-[2.5rem] sm:rounded-t-[3.5rem] py-20 sm:py-28 px-4 sm:px-8 bg-gradient-to-b from-lavender-soft via-canvas to-canvas shadow-[0_-24px_60px_rgba(74,68,88,0.15)] border-t border-white">
+    <div class="max-w-6xl mx-auto">
+      <div class="scroll-reveal flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
+        <div>
+          <span class="inline-block px-3 py-1 rounded-full bg-cobalt-tint text-xs font-bold uppercase tracking-widest text-cobalt">Tentang Saya</span>
+          <h2 class="font-serif font-bold text-3xl sm:text-4xl tracking-tight text-ink mt-2.5">
+            Mengenal Lebih Dekat<span class="text-terracotta">.</span>
+          </h2>
+        </div>
+        <button onclick="openStudioModal('profile')" class="self-start sm:self-auto px-4 py-2 rounded-xl bg-white hover:bg-cobalt text-ink hover:text-white text-xs font-semibold border border-hairline shadow-sm transition-colors interactive-target">
+          Edit Profil &amp; Foto
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-7 items-stretch">
+        <div class="scroll-reveal lg:col-span-7 rounded-3xl bg-white border border-hairline p-7 sm:p-9 shadow-soft flex flex-col justify-between space-y-6 relative overflow-hidden">
+          <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-cobalt via-violet to-terracotta"></div>
+
+          <div id="aboutNarrativeContainer" class="space-y-4 text-ink-soft text-base leading-relaxed pt-1"></div>
+
+          <div class="pt-5 border-t border-hairline grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+            <div class="p-4 rounded-2xl bg-cobalt-tint/60 border border-cobalt/20">
+              <p class="text-xs font-bold text-cobalt">Rasa Ingin Tahu Tinggi</p>
+              <p class="text-xs text-ink-soft mt-1 leading-relaxed">Senang mempelajari hal baru dan mencoba pengalaman berbeda.</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-terracotta-tint/70 border border-terracotta/20">
+              <p class="text-xs font-bold text-terracotta">Kolaboratif dalam Tim</p>
+              <p class="text-xs text-ink-soft mt-1 leading-relaxed">Terbiasa berkoordinasi lintas peran dan menjaga komunikasi terbuka.</p>
+            </div>
+            <div class="p-4 rounded-2xl bg-violet-tint/70 border border-violet/20">
+              <p class="text-xs font-bold text-violet">Tumbuh Lewat Project</p>
+              <p class="text-xs text-ink-soft mt-1 leading-relaxed">Mengasah keterampilan secara langsung melalui praktik nyata.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="scroll-reveal lg:col-span-5 flex flex-col gap-6" style="transition-delay: 100ms;">
+          <div class="rounded-3xl bg-white border border-hairline p-4 shadow-soft flex items-center gap-4">
+            <div class="w-20 h-24 sm:w-24 sm:h-28 rounded-2xl bg-surface overflow-hidden shrink-0 border border-hairline relative">
+              <img id="aboutProfileImg" src="" alt="Sabila Alifia Sundawa" class="hidden w-full h-full object-cover" />
+              <div id="aboutProfileFallback" class="w-full h-full bg-gradient-to-br from-cobalt via-violet to-terracotta text-white flex items-center justify-center font-serif font-bold text-xl">
+                Sa
+              </div>
+            </div>
+            <div class="flex-1 min-w-0">
+              <span class="inline-block px-2.5 py-0.5 rounded-lg bg-terracotta-tint text-terracotta text-[11px] font-bold">
+                Personal Branding
+              </span>
+              <h3 class="font-serif font-bold text-base sm:text-lg text-ink mt-1 truncate">Sabila Alifia Sundawa</h3>
+              <p class="text-xs text-ink-soft mt-0.5">Bisnis, E-Commerce &amp; Digital Creativity</p>
+              <button onclick="openStudioModal('profile')" class="mt-2 text-xs font-bold text-cobalt hover:text-terracotta transition-colors">
+                Ganti / Atur Crop Foto →
+              </button>
+            </div>
+          </div>
+
+          <div class="rounded-3xl bg-gradient-to-br from-violet via-cobalt to-[#C8B6E8] text-white p-7 sm:p-8 relative overflow-hidden shadow-soft flex-1 flex flex-col justify-between">
+            <div class="absolute -right-10 -bottom-10 w-44 h-44 rounded-full bg-blush/50 blur-2xl pointer-events-none"></div>
+
+            <div class="relative z-10">
+              <span class="inline-block px-3 py-1 rounded-xl bg-white/25 backdrop-blur-sm text-xs font-semibold text-white">
+                Pendidikan
+              </span>
+
+              <h3 id="eduUniversity" class="font-serif font-bold text-2xl sm:text-3xl text-white mt-4">
+                Pradita University
+              </h3>
+              <p id="eduMajor" class="text-base font-semibold text-white/95 mt-1">
+                S1 Manajemen
+              </p>
+              <p id="eduPeriod" class="inline-block mt-3 px-3 py-1 rounded-lg bg-white/25 text-xs font-semibold text-white">
+                2025–sekarang
+              </p>
+            </div>
+
+            <p class="relative z-10 mt-6 pt-4 border-t border-white/25 text-sm text-white/95 leading-relaxed">
+              Mendalami konsep manajemen bisnis, pemasaran, serta komunikasi organisasi yang dipraktikkan langsung melalui aktivitas kepanitiaan dan eksplorasi digital.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== EXPERIENCE SECTION ==================== -->
+  <section id="experience" class="relative py-24 sm:py-28 px-4 sm:px-8 bg-canvas bg-dot-subtle">
+    <div class="max-w-6xl mx-auto">
+      <div class="scroll-reveal flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
+        <div>
+          <span class="inline-block px-3 py-1 rounded-full bg-terracotta-tint text-xs font-bold uppercase tracking-widest text-terracotta">Pengalaman</span>
+          <h2 class="font-serif font-bold text-3xl sm:text-4xl tracking-tight text-ink mt-2.5">
+            Peran &amp; Aktivitas yang Pernah Dijalani<span class="text-cobalt">.</span>
+          </h2>
+          <p class="text-ink-soft text-sm sm:text-base mt-2 max-w-2xl">
+            Pengalaman langsung dalam pengelolaan toko online, interaksi live commerce, pembuatan konten promosi, hingga analisis media sosial.
+          </p>
+        </div>
+        <button onclick="openStudioModal('experience')" class="self-start sm:self-auto px-4 py-2 rounded-xl bg-white hover:bg-cobalt text-ink hover:text-white text-xs font-semibold border border-hairline shadow-sm transition-colors interactive-target">
+          Edit Daftar Pengalaman
+        </button>
+      </div>
+
+      <div id="experienceGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+      <div class="scroll-reveal mt-14 rounded-3xl bg-gradient-to-br from-white via-white to-cobalt-tint/50 border border-hairline p-6 sm:p-8 shadow-soft">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div>
+            <h3 class="font-serif font-bold text-xl text-ink">Galeri Dokumentasi Aktivitas</h3>
+            <p class="text-xs sm:text-sm text-ink-soft mt-1">Foto aktivitas e-commerce, sesi live streaming, dan proses kerja harian.</p>
+          </div>
+          <button onclick="openStudioModal('galleries', 'experience')" class="self-start sm:self-auto inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-cobalt to-violet hover:from-terracotta hover:to-cobalt text-white text-xs font-semibold shadow-sm transition-all interactive-target">
+            <span>+ Tambah Foto Aktivitas</span>
+          </button>
+        </div>
+        <div id="experienceGalleryGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== LEADERSHIP SECTION ==================== -->
+  <section id="leadership" class="relative py-24 sm:py-28 px-4 sm:px-8 bg-[#4A4458] text-white overflow-hidden">
+    <div class="pointer-events-none absolute -top-24 left-[10%] w-96 h-96 rounded-full bg-violet/40 blur-[130px]"></div>
+    <div class="pointer-events-none absolute -bottom-24 right-[8%] w-96 h-96 rounded-full bg-blush/40 blur-[130px]"></div>
+
+    <div class="max-w-6xl mx-auto relative z-10">
+      <div class="scroll-reveal flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
+        <div>
+          <span class="inline-block px-3 py-1 rounded-full bg-white/15 text-xs font-bold uppercase tracking-widest text-blush">Organisasi &amp; Kepemimpinan</span>
+          <h2 class="font-serif font-bold text-3xl sm:text-4xl tracking-tight text-white mt-2.5">
+            Kontribusi &amp; Kepanitiaan Kampus<span class="text-blush">.</span>
+          </h2>
+        </div>
+        <button onclick="openStudioModal('galleries', 'organization')" class="self-start sm:self-auto px-4 py-2 rounded-xl bg-white/15 hover:bg-terracotta text-white text-xs font-semibold border border-white/20 transition-colors interactive-target">
+          Kelola Foto Organisasi
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-7 items-stretch">
+        <div class="scroll-reveal lg:col-span-7 rounded-3xl bg-gradient-to-br from-[#5A5080] via-[#7A6DA0] to-[#A8B5F0] border border-white/20 p-8 sm:p-10 relative overflow-hidden shadow-xl flex flex-col justify-between">
+          <div class="absolute -bottom-16 -right-16 w-56 h-56 rounded-full bg-blush/40 blur-3xl pointer-events-none"></div>
+
+          <div class="relative z-10">
+            <span class="inline-block px-3.5 py-1 rounded-xl bg-terracotta text-white text-xs font-bold shadow-coral">
+              Leadership Highlight
+            </span>
+            <h3 id="leadProjectTitle" class="font-serif font-bold text-2xl sm:text-3xl text-white mt-5 leading-snug">
+              Ketua Pelaksana PKKMB Program Studi Manajemen
+            </h3>
+            <div class="mt-5 p-4 sm:p-5 rounded-2xl bg-black/15 backdrop-blur-sm border-l-4 border-blush">
+              <p class="text-[11px] font-bold uppercase tracking-wider text-blush mb-1">Tema Kegiatan</p>
+              <p id="leadProjectTheme" class="font-serif italic text-xl sm:text-2xl text-white">
+                "Embrace Your Inner Light, Celebrate Your New Journey."
+              </p>
+            </div>
+            <p id="leadProjectDesc" class="mt-5 text-white/90 text-sm sm:text-base leading-relaxed">
+              Memimpin koordinasi lintas divisi untuk menyukseskan rangkaian penyambutan mahasiswa baru.
+            </p>
+          </div>
+
+          <div class="relative z-10 mt-7 pt-5 border-t border-white/20 flex flex-wrap gap-2">
+            <span class="px-3 py-1 rounded-xl bg-white/15 text-xs font-medium text-white">Koordinasi Tim</span>
+            <span class="px-3 py-1 rounded-xl bg-white/15 text-xs font-medium text-white">Komunikasi Lintas Divisi</span>
+            <span class="px-3 py-1 rounded-xl bg-white/15 text-xs font-medium text-white">Kepemimpinan</span>
+            <span class="px-3 py-1 rounded-xl bg-white/15 text-xs font-medium text-white">Kerja Sama</span>
+          </div>
+        </div>
+
+        <div class="scroll-reveal lg:col-span-5 rounded-3xl bg-white text-ink p-8 sm:p-9 shadow-xl flex flex-col justify-between relative overflow-hidden" style="transition-delay: 100ms;">
+          <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-terracotta to-cobalt"></div>
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cobalt to-violet text-white flex items-center justify-center mb-6 shadow-sm">
+              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+            <span class="text-xs font-bold uppercase tracking-wider text-cobalt">Organisasi Kampus</span>
+            <h3 id="orgName" class="font-serif font-bold text-2xl text-ink mt-2 leading-snug">
+              Himpunan Mahasiswa Manajemen (HIMAA)
+            </h3>
+            <p id="orgDivision" class="inline-block mt-2.5 px-3.5 py-1 rounded-xl bg-terracotta-tint text-terracotta font-bold text-xs">
+              Divisi Publikasi dan Dokumentasi
+            </p>
+            <p id="orgDesc" class="mt-5 text-ink-soft text-sm sm:text-base leading-relaxed">
+              Terlibat dalam pembuatan konten publikasi kegiatan organisasi serta dokumentasi acara.
+            </p>
+          </div>
+          <div class="mt-8 pt-5 border-t border-hairline flex items-center justify-between text-xs text-ink-muted">
+            <span>Peran Utama</span>
+            <span class="font-bold text-cobalt">Publikasi &amp; Dokumentasi Acara</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-reveal mt-10 rounded-3xl bg-white/10 backdrop-blur-md border border-white/20 p-6 sm:p-8">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div>
+            <h3 class="font-serif font-bold text-xl text-white">Dokumentasi HIMAA &amp; Kepanitiaan PKKMB</h3>
+            <p class="text-xs sm:text-sm text-white/85 mt-1">Foto rapat koordinasi, kepanitiaan, dan publikasi kegiatan kampus.</p>
+          </div>
+          <button onclick="openStudioModal('galleries', 'organization')" class="self-start sm:self-auto inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-terracotta hover:bg-cobalt text-white text-xs font-semibold shadow-coral transition-colors interactive-target">
+            <span>+ Tambah Foto Kegiatan</span>
+          </button>
+        </div>
+        <div id="organizationGalleryGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PROJECTS SECTION ==================== -->
+  <section id="projects" class="relative py-24 sm:py-28 px-4 sm:px-8 bg-gradient-to-b from-canvas via-lavender-soft/40 to-canvas">
+    <div class="max-w-6xl mx-auto">
+      <div class="scroll-reveal flex flex-col lg:flex-row lg:items-end justify-between gap-5 mb-8">
+        <div>
+          <span class="inline-block px-3 py-1 rounded-full bg-violet-tint text-xs font-bold uppercase tracking-widest text-violet">Portfolio Project</span>
+          <h2 class="font-serif font-bold text-3xl sm:text-4xl tracking-tight text-ink mt-2.5">
+            Eksplorasi &amp; Dokumentasi Project<span class="text-terracotta">.</span>
+          </h2>
+          <p class="text-ink-soft text-sm sm:text-base mt-2 max-w-2xl">
+            Pilih kartu project untuk melihat rincian tujuan, peran, proses pengerjaan, dan galeri dokumentasi.
+          </p>
+        </div>
+        <button onclick="openStudioModal('projects')" class="self-start lg:self-auto inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-cobalt to-violet hover:from-terracotta hover:to-cobalt text-white font-semibold text-xs shadow-cobalt transition-all interactive-target">
+          <span>+ Tambah / Kelola Project</span>
+        </button>
+      </div>
+
+      <div id="projectCategoryFilters" class="scroll-reveal flex items-center gap-2 overflow-x-auto pb-3 mb-8 no-scrollbar"></div>
+      <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </div>
+  </section>
+
+  <!-- ==================== SKILLS SECTION ==================== -->
+  <section id="skills" class="relative py-24 sm:py-28 px-4 sm:px-8 bg-surface/70 border-y border-hairline">
+    <div class="max-w-6xl mx-auto">
+      <div class="scroll-reveal max-w-2xl mb-12">
+        <span class="inline-block px-3 py-1 rounded-full bg-cobalt-tint text-xs font-bold uppercase tracking-widest text-cobalt">Kemampuan</span>
+        <h2 class="font-serif font-bold text-3xl sm:text-4xl tracking-tight text-ink mt-2.5">
+          Keterampilan Teknis &amp; Interpersonal<span class="text-terracotta">.</span>
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-7">
+        <div class="scroll-reveal lg:col-span-7 rounded-3xl bg-white border border-hairline p-7 sm:p-9 shadow-soft relative overflow-hidden">
+          <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-cobalt to-violet"></div>
+          <div class="flex items-center justify-between mb-6 pt-1">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-cobalt">Hard Skills</span>
+              <h3 class="font-serif font-bold text-xl text-ink mt-1">Keahlian Operasional &amp; Kreatif</h3>
+            </div>
+            <span class="px-3 py-1 rounded-xl bg-cobalt-tint text-cobalt text-xs font-bold">8 Keahlian</span>
+          </div>
+          <div id="hardSkillsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5"></div>
+        </div>
+
+        <div class="scroll-reveal lg:col-span-5 rounded-3xl bg-gradient-to-br from-peach-soft via-white to-lavender-soft border border-hairline p-7 sm:p-9 shadow-soft flex flex-col justify-between relative overflow-hidden" style="transition-delay: 100ms;">
+          <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-terracotta to-violet"></div>
+          <div class="pt-1">
+            <div class="flex items-center justify-between mb-6">
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-terracotta">Soft Skills</span>
+                <h3 class="font-serif font-bold text-xl text-ink mt-1">Cara Bekerja &amp; Berkolaborasi</h3>
+              </div>
+              <span class="px-3 py-1 rounded-xl bg-white text-terracotta border border-terracotta/30 text-xs font-bold">6 Keahlian</span>
+            </div>
+            <div id="softSkillsGrid" class="space-y-3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== GALLERY SECTION ==================== -->
+  <section id="gallery" class="relative py-24 sm:py-28 px-4 sm:px-8 bg-canvas">
+    <div class="max-w-6xl mx-auto">
+      <div class="scroll-reveal flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+        <div>
+          <span class="inline-block px-3 py-1 rounded-full bg-teal-tint text-xs font-bold uppercase tracking-widest text-teal">Personal Gallery</span>
+          <h2 class="font-serif font-bold text-3xl sm:text-4xl tracking-tight text-ink mt-2.5">
+            Ruang Dokumentasi &amp; Karya Lainnya<span class="text-terracotta">.</span>
+          </h2>
+          <p class="text-ink-soft text-sm sm:text-base mt-2 max-w-xl">
+            Tempat menyimpan berbagai dokumentasi kegiatan, eksperimen kreatif, dan momen berkesan lainnya.
+          </p>
+        </div>
+        <button onclick="openStudioModal('galleries', 'personal')" class="self-start sm:self-auto inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-ink hover:bg-cobalt text-white text-xs font-semibold transition-colors interactive-target">
+          <span>+ Kelola Personal Gallery</span>
+        </button>
+      </div>
+      <div id="personalGalleryGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER / CONTACT ==================== -->
+  <footer id="contact" class="px-4 sm:px-8 pb-12 pt-6 bg-canvas">
+    <div class="max-w-6xl mx-auto">
+      <div class="scroll-reveal rounded-[2.25rem] bg-gradient-to-br from-[#4A4458] via-[#7A6DA0] to-[#A8B5F0] text-white px-6 py-16 sm:px-14 sm:py-20 text-center relative overflow-hidden shadow-xl">
+        <div class="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-[34rem] h-[16rem] bg-blush/40 blur-[110px] rounded-full"></div>
+        <div class="pointer-events-none absolute -bottom-24 right-[10%] w-72 h-72 bg-violet/50 blur-[100px] rounded-full"></div>
+
+        <div class="relative z-10 max-w-2xl mx-auto space-y-6">
+          <span class="inline-block px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-sm border border-white/25 text-xs font-semibold text-white">
+            Mari Terhubung
+          </span>
+          <h2 class="font-serif font-bold text-3xl sm:text-5xl tracking-tight text-white leading-tight">
+            "Let's Connect and Create <span class="font-serif italic font-normal text-blush">Something Meaningful</span>."
+          </h2>
+          <p class="text-white/90 text-sm sm:text-base leading-relaxed">
+            Senang berdiskusi seputar project e-commerce, digital marketing, pembuatan konten, atau peluang kolaborasi baru.
+          </p>
+          <div class="pt-3 flex flex-wrap items-center justify-center gap-3.5">
+            <button onclick="handleEmailContact()" class="magnetic-btn inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-terracotta hover:bg-[#F0A08E] text-white font-semibold text-sm shadow-coral interactive-target">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <span id="contactEmailLabel">sabila.alifia@placeholder.com</span>
+            </button>
+            <a id="contactLinkedInLink" href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="magnetic-btn inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-white/15 hover:bg-white hover:text-ink text-white font-semibold text-sm border border-white/25 transition-all interactive-target">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+            <a id="contactInstagramLink" href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="magnetic-btn inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-white/15 hover:bg-blush hover:text-ink text-white font-semibold text-sm border border-white/25 transition-all interactive-target">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
+              </svg>
+              <span id="contactInstagramLabel">@sabila.alifia</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-ink-muted px-2">
+        <p>© <span id="currentYear"></span> Sabila Alifia Sundawa — S1 Manajemen, Pradita University.</p>
+        <div class="flex items-center gap-4">
+          <button onclick="openStudioModal('profile')" class="hover:text-ink font-medium transition-colors">Kelola Konten Portfolio</button>
+          <span>•</span>
+          <a href="#hero" class="hover:text-ink font-medium transition-colors">Kembali ke Atas ↑</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Quick Studio Button -->
+  <button onclick="openStudioModal('profile')" class="fixed bottom-5 right-5 z-40 flex items-center gap-2 px-4 py-3 rounded-2xl bg-white hover:bg-ink text-ink hover:text-white border border-hairline shadow-lg transition-all duration-200 interactive-target" title="Kelola Foto & Konten Portfolio">
+    <span class="w-2 h-2 rounded-full bg-cobalt"></span>
+    <span class="text-xs font-bold">Edit Portfolio</span>
+  </button>
+
+  <!-- ==================== PROJECT DETAIL MODAL ==================== -->
+  <div id="projectDetailModal" class="modal-backdrop fixed inset-0 z-[90] bg-ink/60 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div class="modal-panel relative w-full max-w-3xl bg-white border border-hairline rounded-3xl shadow-2xl overflow-hidden my-auto max-h-[90vh] flex flex-col">
+      <div class="flex items-center justify-between px-6 py-4 bg-surface border-b border-hairline shrink-0">
+        <span id="detailProjectCategory" class="px-3 py-1 rounded-xl bg-cobalt-tint text-xs text-cobalt font-bold">Kategori</span>
+        <div class="flex items-center gap-2">
+          <button id="detailEditProjectBtn" class="px-3.5 py-2 rounded-xl bg-white hover:bg-ink text-ink hover:text-white border border-hairline text-xs font-semibold transition-colors interactive-target">
+            Edit Project
+          </button>
+          <button onclick="closeProjectDetail()" class="p-2 rounded-xl bg-white hover:bg-terracotta text-ink hover:text-white border border-hairline transition-colors interactive-target" aria-label="Tutup">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div id="projectDetailBody" class="p-6 sm:p-8 overflow-y-auto space-y-6"></div>
+    </div>
+  </div>
+
+  <!-- ==================== LIGHTBOX MODAL ==================== -->
+  <div id="lightboxModal" class="modal-backdrop fixed inset-0 z-[105] bg-ink/90 backdrop-blur-xl flex items-center justify-center p-4">
+    <div class="modal-panel relative max-w-4xl w-full flex flex-col items-center">
+      <div class="w-full flex items-center justify-between mb-3 px-1">
+        <p id="lightboxCaption" class="text-sm font-medium text-white/90"></p>
+        <button onclick="closeLightbox()" class="px-4 py-2 rounded-xl bg-white/20 hover:bg-white text-white hover:text-ink text-xs font-semibold transition-colors">
+          Tutup ✕
+        </button>
+      </div>
+      <div id="lightboxContent" class="w-full max-h-[80vh] flex items-center justify-center rounded-2xl overflow-hidden bg-black/40 p-2"></div>
+    </div>
+  </div>
+
+  <!-- ==================== PORTFOLIO STUDIO MODAL ==================== -->
+  <div id="studioModal" class="modal-backdrop fixed inset-0 z-[95] bg-ink/60 backdrop-blur-md flex items-center justify-center p-2 sm:p-6 overflow-y-auto">
+    <div class="modal-panel relative w-full max-w-5xl bg-white border border-hairline rounded-3xl shadow-2xl overflow-hidden my-auto max-h-[92vh] flex flex-col">
+      <div class="flex flex-wrap items-center justify-between gap-3 px-6 py-4 bg-surface border-b border-hairline shrink-0">
+        <div>
+          <h3 class="font-serif font-bold text-base sm:text-lg text-ink leading-tight">Pengelola Konten &amp; Galeri Portfolio</h3>
+          <p class="text-xs text-ink-muted mt-0.5">Unggah foto, atur posisi foto profil, dan perbarui project tanpa mengedit kode.</p>
+        </div>
+        <button onclick="closeStudioModal()" class="px-4 py-2 rounded-xl bg-ink hover:bg-cobalt text-white text-xs font-semibold transition-colors">
+          Selesai &amp; Tutup ✕
+        </button>
+      </div>
+
+      <div class="flex items-center gap-2 px-6 py-3 bg-canvas border-b border-hairline overflow-x-auto shrink-0">
+        <button onclick="switchStudioTab('profile')" data-studio-tab="profile" class="studio-tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all whitespace-nowrap">1. Foto Profil, Bio &amp; Kontak</button>
+        <button onclick="switchStudioTab('projects')" data-studio-tab="projects" class="studio-tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all whitespace-nowrap">2. Project &amp; Dokumentasi</button>
+        <button onclick="switchStudioTab('galleries')" data-studio-tab="galleries" class="studio-tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all whitespace-nowrap">3. Galeri Foto</button>
+        <button onclick="switchStudioTab('experience')" data-studio-tab="experience" class="studio-tab-btn px-4 py-2 rounded-xl text-xs font-semibold transition-all whitespace-nowrap">4. Teks Pengalaman &amp; Organisasi</button>
+      </div>
+
+      <div id="studioBody" class="p-5 sm:p-7 overflow-y-auto flex-1 space-y-6 bg-canvas"></div>
+    </div>
+  </div>
+
+  <!-- Module Script -->
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
