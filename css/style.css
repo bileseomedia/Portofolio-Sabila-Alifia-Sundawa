@@ -1,0 +1,189 @@
+/* ==================== BASE RESET ==================== */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: clip;
+  background-color: #FDFBFF;
+  color: #4A4458;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* ==================== SCROLLBAR ==================== */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #F5F0FF;
+}
+::-webkit-scrollbar-thumb {
+  background: #D5CBE8;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A8B5F0;
+}
+
+/* ==================== BACKGROUND PATTERN ==================== */
+.bg-dot-subtle {
+  background-image: radial-gradient(rgba(168, 181, 240, 0.15) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ==================== HERO GRADIENT (Soft Pastel Twilight) ==================== */
+.hero-gradient-backdrop {
+  background:
+    radial-gradient(circle at 80% 25%, rgba(255, 214, 224, 0.6) 0%, transparent 50%),
+    radial-gradient(circle at 20% 75%, rgba(200, 182, 232, 0.7) 0%, transparent 55%),
+    linear-gradient(135deg, #5A5080 0%, #7A6DA0 52%, #A8B5F0 100%);
+}
+
+/* ==================== ANIMATIONS ==================== */
+@keyframes floatGentle {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(14px, -18px, 0); }
+}
+@keyframes floatGentleReverse {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(-16px, 14px, 0); }
+}
+@keyframes scrollPulse {
+  0% { transform: translateY(-100%); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+
+.animate-float-gentle {
+  animation: floatGentle 12s ease-in-out infinite;
+}
+.animate-float-gentle-rev {
+  animation: floatGentleReverse 14s ease-in-out infinite;
+}
+.animate-scroll-line {
+  animation: scrollPulse 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* ==================== REVEAL ANIMATIONS ==================== */
+.reveal-mask {
+  overflow: hidden;
+  display: block;
+}
+.reveal-line {
+  display: block;
+  transform: translateY(105%);
+  opacity: 0;
+  transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.65s ease;
+}
+.reveal-line.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==================== MODAL TRANSITIONS ==================== */
+.modal-backdrop {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.modal-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.modal-panel {
+  opacity: 0;
+  transform: translateY(22px) scale(0.985);
+  transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1), transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.modal-backdrop.open .modal-panel {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ==================== INTERACTIVE CARDS ==================== */
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.magnetic-btn {
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+/* ==================== CUSTOM CURSOR ==================== */
+@media (hover: hover) and (pointer: fine) {
+  .custom-cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    border: 1.5px solid rgba(168, 181, 240, 0.5);
+    border-radius: 9999px;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.22s ease, height 0.22s ease, border-color 0.22s ease, background-color 0.22s ease, opacity 0.22s ease;
+  }
+  .custom-cursor-dot.hovered {
+    width: 46px;
+    height: 46px;
+    border-color: rgba(245, 183, 168, 0.75);
+    background-color: rgba(245, 183, 168, 0.1);
+  }
+}
+@media (hover: none), (pointer: coarse) {
+  .custom-cursor-dot {
+    display: none !important;
+  }
+}
+
+/* ==================== UTILITY ==================== */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ==================== STUDIO TAB ACTIVE STATE ==================== */
+.studio-tab-btn {
+  background: white;
+  color: #7A738C;
+  border: 1px solid #EDE7F5;
+}
+.studio-tab-btn:hover {
+  background: #EEF1FC;
+  color: #4A4458;
+}
+.studio-tab-btn.active {
+  background: linear-gradient(135deg, #A8B5F0, #C8B6E8);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 8px 20px -4px rgba(168, 181, 240, 0.5);
+}
